@@ -6,6 +6,5 @@ module.exports = (file) => {
     path.extname(file.originalname).toLocaleLowerCase()
   )
 
-  // return validExtname && validMimetype ? true : false
-  return true
+  return validExtname && validMimetype ? true : false
 }

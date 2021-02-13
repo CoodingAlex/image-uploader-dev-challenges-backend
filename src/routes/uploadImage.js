@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const multer = require('multer')
 
+const UPLOADS_ROUTE = 'http://localhost:3001/public/uploads'
+
 const nameGenerator = require('../utils/nameGenerator')
 const validExtension = require('../utils/validateExtension')
 const path = require('path')
@@ -9,7 +11,6 @@ const uploadRoute = '../../public/uploads'
 const storage = multer.diskStorage({
   destination: path.join(__dirname, uploadRoute),
   filename: (req, file, cb) => {
-    console.log(file)
     cb(null, nameGenerator(file.originalname))
   },
 })
@@ -27,11 +28,10 @@ function uploadImage(app) {
       },
     }).single('image'),
     (req, res, next) => {
-      res.send(
-        `tu imagen ha sido guardada en ${uploadRoute} ${
-          req.file?.filename ? req.file.filename : ''
-        }`
-      )
+      console.log(req)
+      res.json({
+        url: UPLOADS_ROUTE + `/${req.file?.filename ? req.file.filename : ''}`,
+      })
     }
   )
 }
