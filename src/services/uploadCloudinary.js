@@ -1,9 +1,9 @@
 const cloudinary = require('cloudinary').v2
-
+const config = require('../config')
 cloudinary.config({
-  cloud_name: 'dcoxmw8gn',
-  api_key: '615913163348967',
-  api_secret: 'bUPceryQIpCvTtqriLk-SC19O2g',
+  cloud_name: config.cloudinary.cloud_name,
+  api_key: config.cloudinary.api_key,
+  api_secret: config.cloudinary.api_secret,
 })
 
 async function upload(file, options) {
